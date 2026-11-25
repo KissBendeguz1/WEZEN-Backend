@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Dtos\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.12" />
+    <PackageReference Include="Scalar.AspNetCore" Version="3.2.0" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "Wezen_Backend.Controllers.LoginController",
+    "Method": "LoginUser",
+    "RelativePath": "Login/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "logindto",
+        "Type": "Wezen_Backend.Controllers.Dtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wezen_Backend.Controllers.LoginController",
+    "Method": "RegisterUser",
+    "RelativePath": "Login/newUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "Wezen_Backend.Controllers.Dtos.NewUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

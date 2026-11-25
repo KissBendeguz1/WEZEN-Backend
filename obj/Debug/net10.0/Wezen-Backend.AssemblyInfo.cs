@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wezen-Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abdda37249fbe3a46fd0f950ba71f1d1ea91ddf6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wezen-Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wezen-Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
