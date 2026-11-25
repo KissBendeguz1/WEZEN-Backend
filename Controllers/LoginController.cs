@@ -8,6 +8,7 @@ using Wezen_Backend.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Text.RegularExpressions;
+using MySqlX.XDevAPI.Common;
 
 namespace Wezen_Backend.Controllers
 {
@@ -58,14 +59,15 @@ namespace Wezen_Backend.Controllers
                 }
                 else
                 {
-                    return StatusCode(400, "Az email hibas");
+                    return StatusCode(404, "Az email hibas");
                 };
-
                 
+
+
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, "Szerver Hiba");
+                return StatusCode(400, new { message = $"Hiba: {ex.Message}" });
             }
         }
         [HttpPost("Login")]
@@ -79,32 +81,73 @@ namespace Wezen_Backend.Controllers
                
                 if (string.IsNullOrWhiteSpace(logindto.Username))
                 {
-                    return StatusCode(400, "A felhasználónév megadása kötelező.");
+                    return StatusCode(404, "A felhasználónév megadása kötelező.");
                 }
 
                 if (string.IsNullOrWhiteSpace(logindto.Password))  
                 {
-                    return StatusCode(400, "A jelszó megadása kötelező.");
+                    return StatusCode(404, "A jelszó megadása kötelező.");
                 }
 
                 var user = await _context.Users.SingleOrDefaultAsync(a => a.Username == username);
 
                 if (user == null)
                 {
-                    return StatusCode(400, "Hibás felhasználónév");
+                    return StatusCode(404, "Hibás felhasználónév");
                 }
                 var result = _passwordHasher.VerifyHashedPassword(user, user.Password, logindto.Password);
                 if (result == PasswordVerificationResult.Failed)
                 {
-                    return StatusCode(400, "Hibás  jelszó.");
+                    return StatusCode(404, "Hibás  jelszó.");
                 }
                 return StatusCode(200, "Sikeres Bejelentkezes");
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500,"Szerver Hiba");
+                return StatusCode(400, new { message = $"Hiba: {ex.Message}" });
             }
         }
 
+        [HttpGet("GetAllUser")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _context.Users.ToListAsync();
+                if (users != null)
+                {
+                    return StatusCode(200, users);
+                }
+                return StatusCode(404, "Nincsenek felhasznalok mentve.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { message = $"Hiba: {ex.Message}" });
+            }
+
+
+        }
+
+        [HttpGet("GetUserById")]
+        public async Task<IActionResult> GetUserById([FromQuery] string id)
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+                if (id == null)
+                {
+                    return StatusCode(404, "A keresett user ne talalhato");
+
+                }
+                return StatusCode(200, "A keresett user megtalalva.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { message = $"Hiba: {ex.Message}" });
+            }
+
+
+        }
     }
 }
